@@ -4,16 +4,17 @@ import './TodoInfo.scss';
 import { UserInfo } from '../UserInfo';
 
 type Props = {
-  todoInfo: Todo;
+  todo: Todo;
 };
 
-export const TodoInfo: React.FC<Props> = ({ todoInfo }) => {
+export const TodoInfo: React.FC<Props> = ({ todo }) => {
   return (
     <article
-      className={`TodoInfo ${todoInfo.completed && 'TodoInfo--completed'}`}
+      data-id={todo.id}
+      className={`TodoInfo ${todo.completed === true ? 'TodoInfo--completed' : ''}`}
     >
-      <h2 className="TodoInfo__title">{todoInfo.title}</h2>
-      <UserInfo user={todoInfo.user} />
+      <h2 className="TodoInfo__title">{todo.title}</h2>
+      {todo.user && <UserInfo user={todo.user} />}
     </article>
   );
 };

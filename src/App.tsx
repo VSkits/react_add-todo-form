@@ -44,14 +44,14 @@ export const App = () => {
     e.preventDefault();
 
     setHasTitleError(!title);
-    sethasSelectError(!selectValue);
+    sethasSelectError(selectValue === '0');
 
-    if (!title || !selectValue) {
+    if (!title || selectValue === '0') {
       return;
     }
 
     addTodo({
-      id: Math.max(...todos.map(todo => todo.id)) + 1,
+      id: Math.max(...todoList.map(todo => todo.id)) + 1,
       title,
       completed: false,
       userId: +selectValue,
@@ -68,9 +68,10 @@ export const App = () => {
       <form action="/api/todos" onSubmit={handleSubmit} method="POST">
         <div className="field">
           <label htmlFor="title">
-            Title:&nbsp;&nbsp;
+            Title:&nbsp;
             <input
               type="text"
+              placeholder="Enter a title"
               id="title"
               onChange={handleTitleChange}
               value={title}
